@@ -1,4 +1,11 @@
-module HDownloader.Descarga where
+module HDownloader.Descarga
+( DescargaType, 
+  nombreDescarga,
+  archivosDescarga,
+  servidorDescarga,
+  prioridadDescarga,
+  espacioNecesarioDescarga
+) where
 
 import qualified HDownloader.Archivo as Archivo
 import qualified HDownloader.Servidor as Servidor
@@ -6,21 +13,21 @@ import qualified HDownloader.Servidor as Servidor
 -- Descarga = (Nombre, [Archivo], Servidor, Prioridad)
 type DescargaType = (String, [Archivo.ArchivoType], Servidor.ServidorType, Int)
 
-descargaNombre :: DescargaType -> String
-descargaNombre (n, _, _, _) = n
+nombreDescarga :: DescargaType -> String
+nombreDescarga (n, _, _, _) = n
 
-descargaArchivos :: DescargaType -> [Archivo.ArchivoType]
-descargaArchivos (_, as, _, _) = as
+archivosDescarga :: DescargaType -> [Archivo.ArchivoType]
+archivosDescarga (_, as, _, _) = as
 
-descargaServidor :: DescargaType -> Servidor.ServidorType
-descargaServidor (_, _, s, _) = s
+servidorDescarga :: DescargaType -> Servidor.ServidorType
+servidorDescarga (_, _, s, _) = s
 
-descargaPrioridad :: DescargaType -> Int
-descargaPrioridad (_, _, _, p) = p
+prioridadDescarga :: DescargaType -> Int
+prioridadDescarga (_, _, _, p) = p
 
 {-
-    El espacio en disco que necesitará una descarga es la sumatoria de los
-    tamaños en disco de los archivos que la componen, calculada como: tamaño * (1 + tasa de compresión)
+    2) El espacio en disco que necesitará una descarga es la sumatoria de los tamaños en disco de los
+       archivos que la componen, calculada como: tamaño * (1 + tasa de compresión).
 -}
-descargaEspacioNecesario :: DescargaType -> Int
-descargaEspacioNecesario d = sum [Archivo.archivoTamanio arc * (1 + Archivo.archivoCompresion arc) | arc <- descargaArchivos d]
+espacioNecesarioDescarga :: DescargaType -> Int
+espacioNecesarioDescarga d = sum [Archivo.tamArchivo arc * (1 + Archivo.compresionArchivo arc) | arc <- archivosDescarga d]

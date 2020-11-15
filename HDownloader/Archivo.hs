@@ -1,18 +1,18 @@
 module HDownloader.Archivo
 ( ArchivoType, 
-  archivoUrl,
-  archivoTamanio,
-  archivoCompresion
+  urlArchivo,
+  tamArchivo,
+  compresionArchivo
 ) where
 
--- ArchivoType = (URL, Tamaño, Compresión)
+-- ArchivoType = (URL, Tamaño, Compresión) sinonimo/alias
 type ArchivoType = (String, Int, Int)
 
-archivoUrl :: ArchivoType -> String
-archivoUrl (u, _, _) = u
+urlArchivo :: ArchivoType -> String
+urlArchivo (u, _, _) = u
 
-archivoTamanio :: ArchivoType -> Int
-archivoTamanio (_, t, _) = t
+tamArchivo :: ArchivoType -> Int
+tamArchivo (_, t, _) = t
 
-archivoCompresion :: ArchivoType -> Int
-archivoCompresion (_, _, c) = c
+compresionArchivo :: ArchivoType -> Int
+compresionArchivo (_, _, c) = c

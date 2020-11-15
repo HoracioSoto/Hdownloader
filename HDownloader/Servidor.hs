@@ -1,14 +1,26 @@
 module HDownloader.Servidor
 ( ServidorType,
-  servidorNombre,
-  servidorPoliticaAsignacionAnchoBanda
+  ElementoListaNegraType,
+  nombreServidor,
+  politicaAsignacionAnchoBandaServidor,
+  descargasRecientesServidor,
+  listaNegraServidor
 ) where
 
--- ServidorType = (Dominio, PoliticaAsignacionAnchoBanda)
-type ServidorType = (String, Int)
+-- ServidorType = (Dominio, PoliticaAsignacionAnchoBanda, DescargasRecientes, [ListaNegraArchivo])
+type ServidorType = (String, Int, Int, [ElementoListaNegraType])
 
-servidorNombre :: ServidorType -> String
-servidorNombre (n, _) = n
+-- ElementoListaNegraType = (URL, Coeficiente)
+type ElementoListaNegraType = (String, Float)
 
-servidorPoliticaAsignacionAnchoBanda :: ServidorType -> Int
-servidorPoliticaAsignacionAnchoBanda (_, p) = p
+nombreServidor :: ServidorType -> String
+nombreServidor (n, _, _, _) = n
+
+politicaAsignacionAnchoBandaServidor :: ServidorType -> Int
+politicaAsignacionAnchoBandaServidor (_, p, _, _) = p
+
+descargasRecientesServidor :: ServidorType -> Int
+descargasRecientesServidor (_, _, d, _) = d
+
+listaNegraServidor :: ServidorType -> [ElementoListaNegraType]
+listaNegraServidor (_, _, _, l) = l
