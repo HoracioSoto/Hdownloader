@@ -1,12 +1,44 @@
-# Hdownloader
+# HDownloader
+
+## Escenario
+Un grupo de fanáticos de series, música y apuntes de UTN con muy poca paciencia a la hora de bajar sus preciados archivos de la red, ha decidido construir HDownloader, su propio gestor de descargas(*) empleando el paradigma funcional en alguno de sus módulos. El sistema gestiona descargas de conjuntos de archivos, que pueden pueden provenir de diversos servidores (como por ejemplo, grupos de la facultad o youtube), las cuales están priorizadas por el usuario en una escala de 1 a 5, y tienen un nombre para identificarlas. Se las representa con 4-tuplas de las forma: (Nombre, [Archivo], Servidor, Prioridad).
+
+Ejemplo:
+descarga1 = (“Sistemas Operativos - Silberschatz”, [ silberschatzParte1, silberschatzParte2 ], megaupload, 5)
+descarga2 = (“Parcial de funcional Dentista”, [parcialDentista], pdep, 2)
+
+Los archivos representan un recurso que puede ser descargado, de los que se conoce su URL, su tamaño en MBytes, y su tasa de compresión (si no está comprimido es 0). Se los representa como ternas (URL, Tamaño, Compresión).
+
+Ejemplo:
+silberschatzParte1 = (“www.megaupload.com/?d=CRK5NQB0 ”, 10, 0)
+
+Por último, de los servidores se conoce su dominio (un String), y su política de asignación de ancho de banda, la cual nos permite saber la velocidad (en KBytes/s) a la que se puede descargar un archivo, dado el ancho de banda del que dispone HDownloader y el archivo en cuestión. Se lo
+representa como un par (Dominio, PoliticaAsignacionAnchoBanda).
+
+## Carpetas y archivos
+
+```
+├── HDownloader/
+│   ├── Archivo.hs
+│   ├── Descarga.hs
+│   └── Servidor.hs
+├── .gitignore
+├── HDownloader.hs
+├── LICENSE
+└── README.md
+```
+
+## Iniciamos Haskell
+
+```bash
+$ ghci
+```
 
 ## Cargar modulo
 
 ```bash
 GHCi, version 8.6.5: http://www.haskell.org/ghc/  :? for help
-Prelude> :r
-Ok, no modules loaded.
-Prelude> :cd /home/hito/UTN/Hdownloader/
+Prelude> :cd /path/to/Hdownloader/
 Prelude> :l HDownloader.hs 
 [1 of 4] Compiling HDownloader.Archivo ( HDownloader/Archivo.hs, interpreted )
 [2 of 4] Compiling HDownloader.Servidor ( HDownloader/Servidor.hs, interpreted )
